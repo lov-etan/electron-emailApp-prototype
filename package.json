@@ -1,0 +1,40 @@
+{
+  "name": "gmail-electron-app",
+  "version": "1.0.0",
+  "description": "Gmail Electron Application",
+  "main": "main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run start:renderer\" \"wait-on http://localhost:3000 && npm run start:electron\"",
+    "start:electron": "electron .",
+    "start:renderer": "cd renderer && cross-env BROWSER=none npm start",
+    "build": "cd renderer && npm run build && cd .. && electron-builder",
+    "postinstall": "cd renderer && npm install"
+  },
+  "dependencies": {
+    "better-sqlite3": "^8.0.1",
+    "electron-store": "^8.1.0",
+    "google-auth-library": "^8.7.0",
+    "googleapis": "^109.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.example.gmail-electron-app",
+    "productName": "Gmail Electron App",
+    "files": [
+      "main/**/*",
+      "build/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    }
+  }
+}
